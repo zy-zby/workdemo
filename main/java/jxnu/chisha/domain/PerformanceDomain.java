@@ -8,11 +8,11 @@ import java.sql.Timestamp;
  * @ClassName PerformanceDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "performance", schema = "chisha")
+@Table(name = "performance", schema = "chisha", catalog = "")
 public class PerformanceDomain {
     private int performanceId;
     private Timestamp performanceDate;

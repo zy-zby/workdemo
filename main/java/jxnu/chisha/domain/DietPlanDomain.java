@@ -7,11 +7,11 @@ import javax.persistence.*;
  * @ClassName DietPlanDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "diet_plan", schema = "chisha")
+@Table(name = "diet_plan", schema = "chisha", catalog = "")
 public class DietPlanDomain {
     private int planId;
     private String planName;

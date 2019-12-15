@@ -8,11 +8,11 @@ import java.math.BigDecimal;
  * @ClassName FoodDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "food", schema = "chisha")
+@Table(name = "food", schema = "chisha", catalog = "")
 public class FoodDomain {
     private int foodId;
     private String foodName;

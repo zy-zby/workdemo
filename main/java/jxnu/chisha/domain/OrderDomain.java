@@ -8,17 +8,18 @@ import java.sql.Timestamp;
  * @ClassName OrderDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "order", schema = "chisha")
+@Table(name = "order", schema = "chisha", catalog = "")
 public class OrderDomain {
     private int orderId;
     private Timestamp orderDate;
     private String orderAddr;
     private String orderPay;
     private String orderAmt;
+    private CustomerDomain customerByCustId;
 
     @Id
     @Column(name = "order_id")
@@ -94,5 +95,15 @@ public class OrderDomain {
         result = 31 * result + (orderPay != null ? orderPay.hashCode() : 0);
         result = 31 * result + (orderAmt != null ? orderAmt.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "cust_id", referencedColumnName = "cust_id", nullable = false)
+    public CustomerDomain getCustomerByCustId() {
+        return customerByCustId;
+    }
+
+    public void setCustomerByCustId(CustomerDomain customerByCustId) {
+        this.customerByCustId = customerByCustId;
     }
 }

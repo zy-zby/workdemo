@@ -8,15 +8,16 @@ import java.sql.Timestamp;
  * @ClassName CustDietPlanOrderDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "cust_diet_plan_order", schema = "chisha")
+@Table(name = "cust_diet_plan_order", schema = "chisha", catalog = "")
 public class CustDietPlanOrderDomain {
     private int custPlanOrderId;
     private Timestamp custPlanOrderDate;
     private String custPlanOrderContent;
+    private CustDietPlanDomain custDietPlanByCustPlanId;
 
     @Id
     @Column(name = "cust_plan_order_id")
@@ -70,5 +71,15 @@ public class CustDietPlanOrderDomain {
         result = 31 * result + (custPlanOrderDate != null ? custPlanOrderDate.hashCode() : 0);
         result = 31 * result + (custPlanOrderContent != null ? custPlanOrderContent.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "cust_plan_id", referencedColumnName = "cust_plan_id", nullable = false)
+    public CustDietPlanDomain getCustDietPlanByCustPlanId() {
+        return custDietPlanByCustPlanId;
+    }
+
+    public void setCustDietPlanByCustPlanId(CustDietPlanDomain custDietPlanByCustPlanId) {
+        this.custDietPlanByCustPlanId = custDietPlanByCustPlanId;
     }
 }

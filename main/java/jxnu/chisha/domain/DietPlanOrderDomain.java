@@ -7,15 +7,16 @@ import javax.persistence.*;
  * @ClassName DietPlanOrderDomain
  * @description: TODO
  * @author: zy
- * @create: 2019-12-01 10:32
+ * @create: 2019-12-11 09:08
  * @Version 1.0
  **/
 @Entity
-@Table(name = "diet_plan_order", schema = "chisha")
+@Table(name = "diet_plan_order", schema = "chisha", catalog = "")
 public class DietPlanOrderDomain {
     private int planOrderId;
     private int planOrderDate;
     private String planOrderContent;
+    private DietPlanDomain dietPlanByPlanId;
 
     @Id
     @Column(name = "plan_order_id")
@@ -68,5 +69,15 @@ public class DietPlanOrderDomain {
         result = 31 * result + planOrderDate;
         result = 31 * result + (planOrderContent != null ? planOrderContent.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id", referencedColumnName = "plan_id", nullable = false)
+    public DietPlanDomain getDietPlanByPlanId() {
+        return dietPlanByPlanId;
+    }
+
+    public void setDietPlanByPlanId(DietPlanDomain dietPlanByPlanId) {
+        this.dietPlanByPlanId = dietPlanByPlanId;
     }
 }
