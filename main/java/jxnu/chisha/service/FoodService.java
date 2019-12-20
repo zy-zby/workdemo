@@ -20,4 +20,7 @@ public class FoodService {
     public List<FoodDomain> getType(){
         return foodDao.queryFoodType();
     }
+    public List<FoodDomain> getFoodByType(String type){
+        return foodDao.queryFooodByType(type);
+    }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface FoodDao {
     public List<FoodDomain> queryFoodType();
+    public List<FoodDomain> queryFooodByType(String type);
 }

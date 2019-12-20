@@ -4,6 +4,7 @@ import jxnu.chisha.dao.Impl.ImplShopcarDao;
 import jxnu.chisha.dao.ShopcarDao;
 import jxnu.chisha.domain.ShopcarDomain;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -38,4 +39,8 @@ public class ShopcarService {
     public int removeFood(int custId,int foodId) throws SQLException{
         return shopcarDao.removeFood(custId,foodId);
     }
+    public int getQty(int custId, int foodId) throws SQLException {
+        return  shopcarDao.getQty(custId,foodId);
+    }
+
 }

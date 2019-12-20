@@ -2,6 +2,7 @@ package jxnu.chisha.dao;
 
 import jxnu.chisha.domain.ShopcarDomain;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface ShopcarDao {
     //删除条目
     public int removeFood(int custId,int foodId) throws SQLException;
     //public void removeFoods();
+    public int getQty(int custId, int foodId) throws SQLException;
 }

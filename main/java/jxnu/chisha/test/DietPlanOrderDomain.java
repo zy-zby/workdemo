@@ -1,0 +1,83 @@
+package jxnu.chisha.test;
+
+import javax.persistence.*;
+
+/**
+ * @program: chisha
+ * @ClassName DietPlanOrderDomain
+ * @description: TODO
+ * @author: zy
+ * @create: 2019-12-11 09:08
+ * @Version 1.0
+ **/
+@Entity
+@Table(name = "diet_plan_order", schema = "chisha", catalog = "")
+public class DietPlanOrderDomain {
+    private int planOrderId;
+    private int planOrderDate;
+    private String planOrderContent;
+    private DietPlanDomain dietPlanByPlanId;
+
+    @Id
+    @Column(name = "plan_order_id")
+    public int getPlanOrderId() {
+        return planOrderId;
+    }
+
+    public void setPlanOrderId(int planOrderId) {
+        this.planOrderId = planOrderId;
+    }
+
+    @Basic
+    @Column(name = "plan_order_date")
+    public int getPlanOrderDate() {
+        return planOrderDate;
+    }
+
+    public void setPlanOrderDate(int planOrderDate) {
+        this.planOrderDate = planOrderDate;
+    }
+
+    @Basic
+    @Column(name = "plan_order_content")
+    public String getPlanOrderContent() {
+        return planOrderContent;
+    }
+
+    public void setPlanOrderContent(String planOrderContent) {
+        this.planOrderContent = planOrderContent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DietPlanOrderDomain that = (DietPlanOrderDomain) o;
+
+        if (planOrderId != that.planOrderId) return false;
+        if (planOrderDate != that.planOrderDate) return false;
+        if (planOrderContent != null ? !planOrderContent.equals(that.planOrderContent) : that.planOrderContent != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = planOrderId;
+        result = 31 * result + planOrderDate;
+        result = 31 * result + (planOrderContent != null ? planOrderContent.hashCode() : 0);
+        return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id", referencedColumnName = "plan_id", nullable = false)
+    public DietPlanDomain getDietPlanByPlanId() {
+        return dietPlanByPlanId;
+    }
+
+    public void setDietPlanByPlanId(DietPlanDomain dietPlanByPlanId) {
+        this.dietPlanByPlanId = dietPlanByPlanId;
+    }
+}

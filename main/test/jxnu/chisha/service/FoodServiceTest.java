@@ -18,4 +18,13 @@ class FoodServiceTest {
             System.out.println(foodDomain.getFoodCategory());
         }
     }
+    @Test
+    void getFoodByType(){
+        FoodService foodService=new FoodService();
+        List<FoodDomain> foodDomainList = foodService.getFoodByType("主食");
+        System.out.println(foodDomainList);
+        for(FoodDomain foodDomain:foodDomainList){
+            System.out.println(foodDomain.getFoodName());
+        }
+    }
 }

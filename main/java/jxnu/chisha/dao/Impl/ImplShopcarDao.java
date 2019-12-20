@@ -32,7 +32,9 @@ public class ImplShopcarDao implements ShopcarDao {
                 "custshopcar.shopcar_id,\n" +
                 "custshopcar.qty,\n" +
                 "custshopcar.food_name,\n" +
-                "custshopcar.food_price\n" +
+                "custshopcar.food_price,\n" +
+                "custshopcar.food_img,\n" +
+                "custshopcar.food_id\n" +
                 "FROM\n" +
                 "custshopcar\nwhere cust_id=?";
         try {
@@ -49,6 +51,8 @@ public class ImplShopcarDao implements ShopcarDao {
                 shopcar.setQty(rs.getInt(2));
                 food.setFoodName(rs.getString(3));
                 food.setFoodPrice(rs.getBigDecimal(4));
+                food.setFoodImg(rs.getString(5));
+                food.setFoodId(rs.getInt(6));
                 list.add(shopcar);
             }
             return list;
@@ -166,6 +170,33 @@ public class ImplShopcarDao implements ShopcarDao {
             st.setInt(1, custId);
             st.setInt(2, foodId);
             return st.executeUpdate();
+        } finally {
+            try{
+                JDBCUtil.closeStatement(st);
+                JDBCUtil.closeConnection(conn);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    @Override
+    public int getQty(int custId, int foodId) throws SQLException{
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs=null;
+        String sql="SELECT qty from shopcar "+
+                "  where cust_id =? and food_id=?";
+        int qty = 0;
+        try {
+            conn = JDBCUtil.getConnection();
+            st = conn.prepareStatement(sql);
+            st.setInt(1, custId);
+            st.setInt(2, foodId);
+            rs=st.executeQuery();
+            if (rs.next()){
+                qty=rs.getInt(1);
+            }
+            return qty;
         } finally {
             try{
                 JDBCUtil.closeStatement(st);

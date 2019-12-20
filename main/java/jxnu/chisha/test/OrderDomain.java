@@ -1,8 +1,7 @@
-package jxnu.chisha.domain;
+package jxnu.chisha.test;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @program: chisha
@@ -13,7 +12,7 @@ import java.util.List;
  * @Version 1.0
  **/
 @Entity
-@Table(name = "ordert", schema = "chisha", catalog = "")
+@Table(name = "order", schema = "chisha", catalog = "")
 public class OrderDomain {
     private int orderId;
     private Timestamp orderDate;
@@ -21,20 +20,6 @@ public class OrderDomain {
     private String orderPay;
     private String orderAmt;
     private CustomerDomain customerByCustId;
-    /**
-     * 一对多关联
-     */
-    private List<OrderDetailDomain> itemList;
-
-    @JoinColumn(name = "order_detail_id")
-    @OneToMany(cascade={CascadeType.REMOVE})
-    public List<OrderDetailDomain> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<OrderDetailDomain> itemList) {
-        this.itemList = itemList;
-    }
 
     @Id
     @Column(name = "order_id")

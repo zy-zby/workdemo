@@ -25,11 +25,27 @@ import java.util.Map;
  * @create: 2019-12-01 11:18
  * @Version 1.0
  **/
-@WebServlet("/food/gettype")
+@WebServlet("/food")
 public class FoodController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);
+        String type = req.getParameter("type");
+        if(("getcatagory").equals(type)){
+            getcatagory(req,resp);
+        }
+        if(("getfood").equals(type)){
+            getfood(req,resp);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //super.doPost(req, resp);
+        doGet(req,resp);
+    }
+
+    private void getcatagory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter out=resp.getWriter();
         Map<String, Object> modelMap = new HashMap<String, Object>();
@@ -46,10 +62,12 @@ public class FoodController extends HttpServlet {
         //out.println(new Gson().toJson(modelMap));
         out.println(new Gson().toJson(list));
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //super.doPost(req, resp);
-        doGet(req,resp);
+    private void getfood(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String foodtype=req.getParameter("foodtype");
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter out=resp.getWriter();
+        FoodService foodService=new FoodService();
+        List<FoodDomain> foodDomainList = foodService.getFoodByType(foodtype);
+        out.println(new Gson().toJson(foodDomainList));
     }
 }
